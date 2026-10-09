@@ -1,5 +1,5 @@
 // Simple client-side state for SaathiGo. Everything is saved in localStorage.
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, type Context, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type TextSize = "normal" | "large" | "xlarge";
 export type Booking = {
@@ -66,7 +66,9 @@ type Ctx = {
   clearBookings: () => void;
 };
 
-const AppCtx = createContext<Ctx | null>(null);
+// Keep one context instance even when the dev preview hot-reloads this file.
+const g = globalThis as { __saathiCtx?: Context<Ctx | null> };
+const AppCtx = g.__saathiCtx ?? (g.__saathiCtx = createContext<Ctx | null>(null));
 const KEY = "saathigo-v1";
 
 export function AppProvider({ children }: { children: ReactNode }) {
