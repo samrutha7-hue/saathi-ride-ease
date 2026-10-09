@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as ReviewRouteImport } from './routes/review'
+import { Route as ConfirmedIdRouteImport } from './routes/confirmed.$id'
+import { Route as RidesIndexRouteImport } from './routes/rides.index'
+import { Route as RidesIdRouteImport } from './routes/rides.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmedIdRoute = ConfirmedIdRouteImport.update({
+  id: '/confirmed/$id',
+  path: '/confirmed/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RidesIndexRoute = RidesIndexRouteImport.update({
+  id: '/rides/',
+  path: '/rides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RidesIdRoute = RidesIdRouteImport.update({
+  id: '/rides/$id',
+  path: '/rides/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
+  '/help': typeof HelpRoute
+  '/review': typeof ReviewRoute
+  '/confirmed/$id': typeof ConfirmedIdRoute
+  '/rides/$id': typeof RidesIdRoute
+  '/rides/': typeof RidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
+  '/help': typeof HelpRoute
+  '/review': typeof ReviewRoute
+  '/confirmed/$id': typeof ConfirmedIdRoute
+  '/rides/$id': typeof RidesIdRoute
+  '/rides': typeof RidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
+  '/help': typeof HelpRoute
+  '/review': typeof ReviewRoute
+  '/confirmed/$id': typeof ConfirmedIdRoute
+  '/rides/$id': typeof RidesIdRoute
+  '/rides/': typeof RidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/book'
+    | '/help'
+    | '/review'
+    | '/confirmed/$id'
+    | '/rides/$id'
+    | '/rides/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/book'
+    | '/help'
+    | '/review'
+    | '/confirmed/$id'
+    | '/rides/$id'
+    | '/rides'
+  id:
+    | '__root__'
+    | '/'
+    | '/book'
+    | '/help'
+    | '/review'
+    | '/confirmed/$id'
+    | '/rides/$id'
+    | '/rides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookRoute: typeof BookRoute
+  HelpRoute: typeof HelpRoute
+  ReviewRoute: typeof ReviewRoute
+  ConfirmedIdRoute: typeof ConfirmedIdRoute
+  RidesIdRoute: typeof RidesIdRoute
+  RidesIndexRoute: typeof RidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmed/$id': {
+      id: '/confirmed/$id'
+      path: '/confirmed/$id'
+      fullPath: '/confirmed/$id'
+      preLoaderRoute: typeof ConfirmedIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rides/': {
+      id: '/rides/'
+      path: '/rides'
+      fullPath: '/rides/'
+      preLoaderRoute: typeof RidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rides/$id': {
+      id: '/rides/$id'
+      path: '/rides/$id'
+      fullPath: '/rides/$id'
+      preLoaderRoute: typeof RidesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookRoute: BookRoute,
+  HelpRoute: HelpRoute,
+  ReviewRoute: ReviewRoute,
+  ConfirmedIdRoute: ConfirmedIdRoute,
+  RidesIdRoute: RidesIdRoute,
+  RidesIndexRoute: RidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
