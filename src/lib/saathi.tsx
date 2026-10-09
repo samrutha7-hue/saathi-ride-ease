@@ -43,8 +43,8 @@ export function createBooking(pickup: string, destination: string): Booking {
     pickup,
     destination,
     fare: estimateFare(destination),
-    driver: DRIVERS[n % DRIVERS.length],
-    vehicle: VEHICLES[n % VEHICLES.length],
+    driver: DRIVERS[n % DRIVERS.length]!,
+    vehicle: VEHICLES[n % VEHICLES.length]!,
     etaMinutes: 5 + (n % 6),
     createdAt: new Date().toISOString(),
   };

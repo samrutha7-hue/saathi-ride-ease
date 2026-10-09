@@ -17,7 +17,7 @@ export const Route = createFileRoute("/book")({
 function Book() {
   const { draft, setDraft } = useApp();
   const navigate = useNavigate();
-  const [errors, setErrors] = useState<{ pickup?: string; destination?: string }>({});
+  const [errors, setErrors] = useState<{ pickup?: string | undefined; destination?: string | undefined }>({});
 
   function onContinue(e: React.FormEvent) {
     e.preventDefault();
@@ -75,7 +75,7 @@ function Book() {
 }
 
 function Field(props: {
-  id: string; label: string; value: string; error?: string; placeholder?: string;
+  id: string; label: string; value: string; error?: string | undefined; placeholder?: string;
   onChange: (v: string) => void;
 }) {
   const [listening, setListening] = useState(false);

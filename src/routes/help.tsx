@@ -20,7 +20,7 @@ function Help() {
   const latest = bookings[0];
   const [alertSent, setAlertSent] = useState(false);
   const [showTrip, setShowTrip] = useState(false);
-  const [contact, setContact] = useState(TRUSTED_CONTACTS[0].name);
+  const [contact, setContact] = useState(TRUSTED_CONTACTS[0]!.name);
   const [message, setMessage] = useState("");
 
   function prepare() {
