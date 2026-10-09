@@ -16,8 +16,8 @@
 | 12 | Clear demo rides | Empty state with Book a Ride button |
 | 13 | Help → Send Emergency Alert (Demo) | Message says alert simulated, nothing sent |
 | 14 | Help → Prepare message | Editable message for chosen fictional contact; Copy works |
-| 15 | Display → A++ | All text gets larger; persists after refresh |
-| 16 | Display → High contrast On | Black/white high-contrast colours |
+| 15 | Settings → A++ | All text gets larger; persists after refresh |
+| 16 | Settings → High contrast On | Black/white high-contrast colours |
 | 17 | Use Tab key | Thick visible focus outline on every control |
 
 Automated: `bunx vitest run` (routing, fare range, demo booking ID).
