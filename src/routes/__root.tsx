@@ -101,14 +101,33 @@ function AppShell() {
   );
 }
 
+function GearIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-7 w-7 shrink-0"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="3.2" />
+      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1.11 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.09a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.09a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z" />
+    </svg>
+  );
+}
+
 function Header() {
   const { textSize, setTextSize, highContrast, setHighContrast } = useApp();
   const [open, setOpen] = useState(false);
-  const sizes: { v: TextSize; label: string }[] = [
-    { v: "normal", label: "A" },
-    { v: "large", label: "A+" },
-    { v: "xlarge", label: "A++" },
+  const sizes: { v: TextSize; label: string; name: string }[] = [
+    { v: "normal", label: "A", name: "normal" },
+    { v: "large", label: "A+", name: "large" },
+    { v: "xlarge", label: "A++", name: "extra large" },
   ];
+  const changed = textSize !== "normal" || highContrast;
   return (
     <header className="bg-primary px-4 pb-4 pt-3 text-primary-foreground">
       <p className="mb-2 inline-block rounded-full bg-warning px-3 py-0.5 text-sm font-bold text-warning-foreground">
@@ -120,16 +139,25 @@ function Header() {
           <span className="block text-sm opacity-90">Every journey, with care.</span>
         </Link>
         <button
-          className="btn shrink-0 border-primary-foreground bg-transparent text-primary-foreground"
+          className="btn relative shrink-0 gap-2 border-primary-foreground bg-transparent px-4 text-primary-foreground"
           aria-expanded={open}
           aria-controls="a11y-panel"
+          aria-label="Comfort settings: text size and contrast"
           onClick={() => setOpen(!open)}
         >
-          Aa Display
+          <GearIcon />
+          <span>Settings</span>
+          {changed && (
+            <span
+              aria-hidden="true"
+              className="absolute right-1.5 top-1.5 h-3 w-3 rounded-full bg-accent ring-2 ring-primary"
+            />
+          )}
         </button>
       </div>
       {open && (
         <div id="a11y-panel" className="card mt-3 p-4 text-card-foreground">
+          <h2 className="mb-3 font-display text-lg font-bold">Comfort settings</h2>
           <fieldset>
             <legend className="mb-2 font-bold">Text size</legend>
             <div className="grid grid-cols-3 gap-2">
@@ -137,7 +165,7 @@ function Header() {
                 <button
                   key={s.v}
                   aria-pressed={textSize === s.v}
-                  aria-label={`Text size ${s.v === "normal" ? "normal" : s.v === "large" ? "large" : "extra large"}`}
+                  aria-label={`Text size ${s.name}`}
                   onClick={() => setTextSize(s.v)}
                   className={`btn ${textSize === s.v ? "btn-primary" : "btn-outline"}`}
                 >
@@ -153,6 +181,9 @@ function Header() {
             className={`btn mt-3 w-full ${highContrast ? "btn-primary" : "btn-outline"}`}
           >
             High contrast: {highContrast ? "On" : "Off"}
+          </button>
+          <button onClick={() => setOpen(false)} className="btn btn-outline mt-3 w-full">
+            Done
           </button>
         </div>
       )}
