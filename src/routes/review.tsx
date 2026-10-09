@@ -14,7 +14,7 @@ export const Route = createFileRoute("/review")({
 });
 
 function Review() {
-  const { draft, addBooking, setDraft } = useApp();
+  const { draft, addBooking } = useApp();
   const navigate = useNavigate();
 
   if (!draft.pickup.trim() || !draft.destination.trim()) {
@@ -29,7 +29,6 @@ function Review() {
   function confirm() {
     const b = createBooking(draft.pickup, draft.destination);
     addBooking(b);
-    setDraft({ ...draft, destination: "" });
     navigate({ to: "/confirmed/$id", params: { id: b.id } });
   }
 
