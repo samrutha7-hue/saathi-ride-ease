@@ -3,7 +3,7 @@
 ```text
 Browser only (no server data)
  ┌──────────────────────────────────────────────┐
- │ __root.tsx  Header (Display settings) + Nav  │
+ │ __root.tsx  Header (Settings) + Nav  │
  │   AppProvider (src/lib/saathi.tsx)           │
  │     state: textSize, highContrast,           │
  │            draft {pickup, destination},      │
