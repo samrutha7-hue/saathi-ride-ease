@@ -133,13 +133,13 @@ function Header() {
       <p className="mb-2 inline-block rounded-full bg-warning px-3 py-0.5 text-sm font-bold text-warning-foreground">
         Student Prototype — Demonstration Only
       </p>
-      <div className="flex items-center justify-between gap-3">
-        <Link to="/" className="min-w-0 rounded-lg" aria-label="SaathiGo home">
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <Link to="/" className="shrink-0 rounded-lg" aria-label="SaathiGo home">
           <span className="block font-display text-2xl font-bold">Saathi<span className="text-accent">Go</span></span>
           <span className="block text-sm opacity-90">Every journey, with care.</span>
         </Link>
         <button
-          className="btn relative shrink-0 gap-2 border-primary-foreground bg-transparent px-4 text-primary-foreground"
+          className="btn relative ml-auto shrink-0 gap-1.5 whitespace-nowrap border-primary-foreground bg-transparent px-3 text-primary-foreground"
           aria-expanded={open}
           aria-controls="a11y-panel"
           aria-label="Comfort settings: text size and contrast"
@@ -150,7 +150,7 @@ function Header() {
           {changed && (
             <span
               aria-hidden="true"
-              className="absolute right-1.5 top-1.5 h-3 w-3 rounded-full bg-accent ring-2 ring-primary"
+              className="absolute right-1 top-1 h-3 w-3 rounded-full bg-accent ring-2 ring-primary"
             />
           )}
         </button>
